@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PlanillaDePagoContCostos
 {
-    public partial class MetodoUeps : Form
+    public partial class frmMetodoUeps : Form
     {
-        public MetodoUeps()
+        public frmMetodoUeps()
         {
             InitializeComponent();
         }

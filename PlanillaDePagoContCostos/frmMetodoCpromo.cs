@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace PlanillaDePagoContCostos
 {
-    public partial class MetodoPeps : Form
+    public partial class frmMetodoCpromo : Form
     {
-        public MetodoPeps()
+        public frmMetodoCpromo()
         {
             InitializeComponent();
         }

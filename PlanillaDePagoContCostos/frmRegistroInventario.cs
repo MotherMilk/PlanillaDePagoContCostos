@@ -8,17 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using MODELO;
 
 namespace PlanillaDePagoContCostos
 {
-    public partial class RegistroInventario : Form
+    public partial class frmRegistroInventario : Form
     {
-        static string[] frm = { "PEPS", "UEPS",
+        static string[] frm = { "UEPS", "PEPS",
             "C/PROMO" };
         static string[] frm2 = { "ACE", "JABON",
             "CLORO", "SUVITEL", "DEERGENTE" };
+        int M;
 
-        public RegistroInventario()
+        public frmRegistroInventario()
         {
             InitializeComponent();
         }
@@ -30,38 +32,48 @@ namespace PlanillaDePagoContCostos
         }
         private void cboMt1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            Principal objp = new();
-            decimal M;
+            /* Principal objp = new();
+             int M;
+             M = objp.validarFrm();*/
+
+            Principal objp = new Principal();
+            objp.validar1 = cboMt1.SelectedItem.ToString(); // Establece validar1 según la selección del usuario.
             M = objp.validarFrm();
         }
 
-        private void btnAceptar1_Click(object sender, EventArgs e, decimal M)
+       
+        private void btnAceptarR_Click(object sender, EventArgs e)
         {
             if (M == 1)
             {
-                MetodoPeps pep = new MetodoPeps();
-                pep.ShowDialog();
+                frmMetodoUeps uep = new frmMetodoUeps();
+                uep.ShowDialog();
             }
             else if (M == 2)
             {
-                MetodoUeps uep = new MetodoUeps();
-                uep.ShowDialog();
+                frmMetodoPeps pep = new frmMetodoPeps();
+                pep.ShowDialog();
+                
             }
             else if (M == 3)
             {
-                MetodoCpromo prom = new MetodoCpromo();
+                frmMetodoCpromo prom = new frmMetodoCpromo();
                 prom.ShowDialog();
             }
             else MessageBox.Show("Seleccione una opcion dentro de la figuras bidimencionales ");
         }
 
-        private void cboMt2_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            Principal objp = new();
-            decimal M;
-            M = objp.validarFrm();
-        }
 
+
+
+
+        /*  private void cboMt2_SelectedIndexChanged(object sender, EventArgs e)
+          {
+              Principal objp = new();
+              decimal M;
+              M = objp.validarFrm();
+          }
+        */
 
 
 
