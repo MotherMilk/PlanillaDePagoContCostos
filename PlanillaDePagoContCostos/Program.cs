@@ -12,6 +12,10 @@ namespace PlanillaDePagoContCostos
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new frmRegistroInventario());
+
+            /*Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new frmMetodoCpromo());*/
         }
     }
 }
