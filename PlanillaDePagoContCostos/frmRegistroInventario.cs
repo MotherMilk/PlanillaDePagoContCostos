@@ -36,11 +36,13 @@ namespace PlanillaDePagoContCostos
              M = objp.validarFrm();*/
 
             Principal objp = new Principal();
+#pragma warning disable CS8601 // Possible null reference assignment.
             objp.validar1 = cboMt1.SelectedItem.ToString(); // Establece validar1 según la selección del usuario.
+#pragma warning restore CS8601 // Possible null reference assignment.
             M = objp.validarFrm();
         }
 
-       
+
         private void btnAceptarR_Click(object sender, EventArgs e)
         {
             if (M == 1)
@@ -52,7 +54,7 @@ namespace PlanillaDePagoContCostos
             {
                 frmMetodoPeps pep = new frmMetodoPeps();
                 pep.ShowDialog();
-                
+
             }
             else if (M == 3)
             {
@@ -60,6 +62,11 @@ namespace PlanillaDePagoContCostos
                 prom.ShowDialog();
             }
             else MessageBox.Show("Seleccione una opcion dentro de la figuras bidimencionales ");
+        }
+
+        private void btnCerrarPrograma_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
 
