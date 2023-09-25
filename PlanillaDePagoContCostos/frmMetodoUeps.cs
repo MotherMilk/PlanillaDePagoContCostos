@@ -14,54 +14,169 @@ namespace PlanillaDePagoContCostos
 {
     public partial class frmMetodoUeps : Form
     {
+        DateTime fecha = DateTime.Now;
         public frmMetodoUeps()
         {
             InitializeComponent();
+
+            string fechaFormateada = fecha.ToString("dd/MM/yyyy");
+            lblfecha.Text = "Fecha: " + fechaFormateada;
+            lblTitulo.Visible = false;
+            lblCan.Visible = false;
+            lblValor.Visible = false;
+
+            // Maneja el evento de selección del ComboBox
+            cboConcepto.SelectedIndexChanged += CboConcepto_SelectedIndexChanged;
+
+
+            btnAgg.Visible = false;
+            btnExportar.Visible = false;
+            btnBorrar.Visible = false;
+
+            txtCantidad.Visible = false;
+            txtValorU.Visible = false;
         }
 
-        /* public void exportaraexcel(DataGridView tabla)
-         {
+        private void CboConcepto_SelectedIndexChanged(object? sender, EventArgs e)
+        {
 
-             Microsoft.Office.Interop.Excel.Application excel = new Microsoft.Office.Interop.Excel.Application();
+            // Obtén la opción seleccionada
+            string opcionSeleccionada = cboConcepto.SelectedItem.ToString();
 
-             excel.Application.Workbooks.Add(true);
+            // Actualiza los TextBox según la opción seleccionada
 
-             int IndiceColumna = 0;
+            if (opcionSeleccionada == "Venta")
+            {
+                txtCantidad.Text = "";
+                txtValorU.Text = "";
+                txtCantidad.Focus();
 
-             foreach (DataGridViewColumn col in tabla.Columns)
+                btnAgg.Visible = true;
+                btnAgg.Enabled = false;
+                btnBorrar.Visible = true;
+                btnBorrar.Enabled = false;
+                btnExportar.Visible = true;
+
+                lblCan.Visible = true;
+                lblValor.Visible = false;
+                txtCantidad.Visible = true;
+                txtValorU.Visible = false;
+                lblTitulo.Visible = true;
+                lblTitulo.Text = "Datos de Venta:";
+            }
+            else if (opcionSeleccionada == "Compra")
+            {
+                txtCantidad.Text = "";
+                txtValorU.Text = "";
+                txtCantidad.Focus();
+
+                btnAgg.Visible = true;
+                btnAgg.Enabled = false;
+                btnBorrar.Visible = true;
+                btnBorrar.Enabled = false;
+                btnExportar.Visible = true;
+
+
+                lblCan.Visible = true;
+                lblValor.Visible = true;
+                txtCantidad.Visible = true;
+                txtValorU.Visible = true;
+                lblTitulo.Visible = true;
+                lblTitulo.Text = "Datos de Compra:";
+            }
+        }
+
+        private void txtCantidad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Bloquear caracteres no numéricos
+            }
+        }
+
+        private void txtValorU_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+                e.Handled = true;
+
+            if ((e.KeyChar == '.') && ((sender as System.Windows.Forms.TextBox).Text.Contains(".")))
+                e.Handled = true;
+
+            if ((e.KeyChar == '.') && (sender as System.Windows.Forms.TextBox).Text.Length == 0)
+                e.Handled = true;
+        }
+
+        private void txtCantidad_TextChanged(object sender, EventArgs e)
+        {
+            VerificarCamposNoVacios();
+
+            HabilitarBotonBorrar();
+        }
+
+        private void txtValorU_TextChanged(object sender, EventArgs e)
+        {
+            VerificarCamposNoVacios();
+
+            HabilitarBotonBorrar();
+        }
+
+
+
+
+        //Este método habilita y deshabilita los botones "Calcular" de cada figura, verificando los textbox vacíos.
+
+        private void VerificarCamposNoVacios()
+        {
+            /* if (!string.IsNullOrWhiteSpace(txtCantidad.Text) && !string.IsNullOrWhiteSpace(txtValorU.Text))
              {
-
-                 IndiceColumna++;
-
-                 excel.Cells[1, IndiceColumna] = col.Name;
+                 // Ambos campos tienen texto, habilita el botón de "calcular"
+                 btnAgg.Enabled = true;
 
              }
+             else
+             {  // Al menos uno de los campos está vacío, deshabilita el botón de "calcular"
+                 btnAgg.Enabled = false;
 
-             int IndeceFila = 0;
+             }*/
 
-             foreach (DataGridViewRow row in tabla.Rows)
-             {
+            if (cboConcepto.SelectedItem.ToString() == "Venta")
+            {
+                btnAgg.Enabled = !string.IsNullOrWhiteSpace(txtCantidad.Text);
 
-                 IndeceFila++;
+            }
+            else if (cboConcepto.SelectedItem.ToString() == "Compra")
+            {
+                // Si la opción seleccionada es "Compra", habilitar cuando ambos TextBox tengan contenido
+                btnAgg.Enabled = !string.IsNullOrWhiteSpace(txtCantidad.Text) && !string.IsNullOrWhiteSpace(txtValorU.Text);
+                //btnBorrar.Enabled = !string.IsNullOrWhiteSpace(txtCantidad.Text) && !string.IsNullOrWhiteSpace(txtValorU.Text);
+            }
+            else
+            {
+                btnAgg.Enabled = false;
+                // btnBorrar.Enabled = false;
+            }
 
-                 IndiceColumna = 0;
+        }
 
-                 foreach (DataGridViewColumn col in tabla.Columns)
-                 {
+        private void btnBorrar_Click(object sender, EventArgs e)
+        {
+            HabilitarBotonBorrar();
+            DialogResult resultado = MessageBox.Show("¿Desea borrar los datos ingresados?", "Confirmar acción", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
 
-                     IndiceColumna++;
+            if (resultado == DialogResult.OK)
+            {
+                txtCantidad.Text = "";
+                txtValorU.Text = "";
+                txtCantidad.Focus();
+                btnBorrar.Enabled = false;
+            }
+        }
 
-                     excel.Cells[IndeceFila + 1, IndiceColumna] = row.Cells[col.Name].Value;
-
-                 }
-
-             }
-
-             excel.Visible = true;
-
-
-         }*/
-
+        private void HabilitarBotonBorrar()
+        {
+            // Verifica si los TextBox tienen datos y habilita el botón de limpiar en consecuencia
+            btnBorrar.Enabled = !string.IsNullOrWhiteSpace(txtCantidad.Text) || !string.IsNullOrWhiteSpace(txtValorU.Text);
+        }
 
 
 
@@ -107,9 +222,63 @@ namespace PlanillaDePagoContCostos
 
 
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnExportar_Click(object sender, EventArgs e)
         {
             exportaraexcel(dataGridView1);
         }
+
+
+        private void btnInicio_Click(object sender, EventArgs e)
+        {
+            DialogResult resultado = MessageBox.Show("¿Desea regresar al menú principal?", "Confirmar acción", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.OK)
+            {
+                this.Hide();
+                frmRegistroInventario menu = new();
+                menu.ShowDialog();
+            }
+        }
+
+            private void btnAgg_Click(object sender, EventArgs e)
+            {
+                // Obtén la opción seleccionada en el ComboBox
+                string opcionSeleccionada = cboConcepto.SelectedItem.ToString();
+
+                // Obtén la fecha actual formateada
+                string fechaFormateada = fecha.ToString("dd/MM/yyyy");
+
+                // Agrega una nueva fila al DataGridView
+                int rowIndex = dataGridView1.Rows.Add();
+
+                // Establece la fecha en la primera columna
+                dataGridView1.Rows[rowIndex].Cells[0].Value = fechaFormateada;
+
+                // Establece la opción seleccionada en la segunda columna
+                dataGridView1.Rows[rowIndex].Cells[1].Value = opcionSeleccionada;
+
+                // Verifica la opción y agrega los datos correspondientes en las columnas restantes
+                if (opcionSeleccionada == "Venta")
+                {
+                    // Agrega la cantidad en la sexta columna
+                    dataGridView1.Rows[rowIndex].Cells[5].Value = txtCantidad.Text;
+                }
+                else if (opcionSeleccionada == "Compra")
+                {
+                    // Agrega el valor unitario en la tercera columna y la cantidad en la segunda columna
+                    dataGridView1.Rows[rowIndex].Cells[3].Value = txtValorU.Text;
+                    dataGridView1.Rows[rowIndex].Cells[2].Value = txtCantidad.Text; // Si deseas poner cantidad en la columna 2
+                }
+
+                // Limpia los TextBox después de agregar los datos
+                txtCantidad.Text = "";
+                txtValorU.Text = "";
+
+                // Deshabilita el botón "Agregar"
+                btnAgg.Enabled = false;
+
+                // Vuelve a verificar si debe habilitar el botón "Borrar"
+                HabilitarBotonBorrar();
+            }
     }
 }

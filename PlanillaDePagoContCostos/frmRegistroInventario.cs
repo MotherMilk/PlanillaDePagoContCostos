@@ -47,17 +47,20 @@ namespace PlanillaDePagoContCostos
         {
             if (M == 1)
             {
+                this.Hide();
                 frmMetodoUeps uep = new frmMetodoUeps();
                 uep.ShowDialog();
             }
             else if (M == 2)
             {
+                this.Hide();
                 frmMetodoPeps pep = new frmMetodoPeps();
                 pep.ShowDialog();
 
             }
             else if (M == 3)
             {
+                this.Hide();
                 frmMetodoCpromo prom = new frmMetodoCpromo();
                 prom.ShowDialog();
             }
@@ -66,7 +69,10 @@ namespace PlanillaDePagoContCostos
 
         private void btnCerrarPrograma_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            DialogResult resultado = MessageBox.Show("¿Desea salir de la aplicación?", "Confirmar salida", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+
+            if (resultado == DialogResult.OK)
+                Application.Exit();
         }
 
 

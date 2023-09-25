@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            button1 = new Button();
+            btnExportar = new Button();
             dataGridView1 = new DataGridView();
             Fecha = new DataGridViewTextBoxColumn();
             Concepto = new DataGridViewTextBoxColumn();
@@ -41,37 +41,42 @@
             CantidadSds = new DataGridViewTextBoxColumn();
             ValorUnSds = new DataGridViewTextBoxColumn();
             ValorTotSds = new DataGridViewTextBoxColumn();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            comboBox1 = new ComboBox();
+            txtValorU = new TextBox();
+            txtCantidad = new TextBox();
+            cboConcepto = new ComboBox();
             label1 = new Label();
-            label2 = new Label();
-            label3 = new Label();
+            lblCan = new Label();
+            lblValor = new Label();
             lblfecha = new Label();
+            btnBorrar = new Button();
+            btnInicio = new Button();
+            lblTitulo = new Label();
+            btnAgg = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
-            // button1
+            // btnExportar
             // 
-            button1.Location = new Point(24, 341);
-            button1.Margin = new Padding(3, 2, 3, 2);
-            button1.Name = "button1";
-            button1.Size = new Size(128, 35);
-            button1.TabIndex = 0;
-            button1.Text = "EXPORTAR";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
+            btnExportar.BackColor = Color.FromArgb(255, 224, 192);
+            btnExportar.Location = new Point(27, 530);
+            btnExportar.Name = "btnExportar";
+            btnExportar.Size = new Size(146, 47);
+            btnExportar.TabIndex = 0;
+            btnExportar.Text = "EXPORTAR";
+            btnExportar.UseVisualStyleBackColor = false;
+            btnExportar.Click += btnExportar_Click;
             // 
             // dataGridView1
             // 
+            dataGridView1.AllowUserToDeleteRows = false;
             dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Fecha, Concepto, CantidadE, ValorUnE, ValorTotE, CantidadS, ValorUnS, ValorTotS, CantidadSds, ValorUnSds, ValorTotSds });
-            dataGridView1.Location = new Point(24, 148);
-            dataGridView1.Margin = new Padding(3, 2, 3, 2);
+            dataGridView1.Location = new Point(12, 194);
             dataGridView1.Name = "dataGridView1";
+            dataGridView1.ReadOnly = true;
             dataGridView1.RowHeadersWidth = 51;
             dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(656, 179);
+            dataGridView1.Size = new Size(1398, 330);
             dataGridView1.TabIndex = 1;
             // 
             // Fecha
@@ -79,6 +84,7 @@
             Fecha.HeaderText = "Fecha";
             Fecha.MinimumWidth = 6;
             Fecha.Name = "Fecha";
+            Fecha.ReadOnly = true;
             Fecha.Resizable = DataGridViewTriState.True;
             Fecha.Width = 95;
             // 
@@ -87,6 +93,7 @@
             Concepto.HeaderText = "Concepto";
             Concepto.MinimumWidth = 6;
             Concepto.Name = "Concepto";
+            Concepto.ReadOnly = true;
             Concepto.Width = 125;
             // 
             // CantidadE
@@ -94,6 +101,7 @@
             CantidadE.HeaderText = "Cantidad";
             CantidadE.MinimumWidth = 6;
             CantidadE.Name = "CantidadE";
+            CantidadE.ReadOnly = true;
             CantidadE.Width = 125;
             // 
             // ValorUnE
@@ -101,6 +109,7 @@
             ValorUnE.HeaderText = "Valor Unitario";
             ValorUnE.MinimumWidth = 6;
             ValorUnE.Name = "ValorUnE";
+            ValorUnE.ReadOnly = true;
             ValorUnE.Width = 125;
             // 
             // ValorTotE
@@ -108,6 +117,7 @@
             ValorTotE.HeaderText = "Valor Total";
             ValorTotE.MinimumWidth = 6;
             ValorTotE.Name = "ValorTotE";
+            ValorTotE.ReadOnly = true;
             ValorTotE.Width = 125;
             // 
             // CantidadS
@@ -115,6 +125,7 @@
             CantidadS.HeaderText = "Cantidad";
             CantidadS.MinimumWidth = 6;
             CantidadS.Name = "CantidadS";
+            CantidadS.ReadOnly = true;
             CantidadS.Width = 125;
             // 
             // ValorUnS
@@ -122,6 +133,7 @@
             ValorUnS.HeaderText = "Valor Unitario";
             ValorUnS.MinimumWidth = 6;
             ValorUnS.Name = "ValorUnS";
+            ValorUnS.ReadOnly = true;
             ValorUnS.Width = 125;
             // 
             // ValorTotS
@@ -129,6 +141,7 @@
             ValorTotS.HeaderText = "Valor Total";
             ValorTotS.MinimumWidth = 6;
             ValorTotS.Name = "ValorTotS";
+            ValorTotS.ReadOnly = true;
             ValorTotS.Width = 125;
             // 
             // CantidadSds
@@ -136,6 +149,7 @@
             CantidadSds.HeaderText = "Cantidad";
             CantidadSds.MinimumWidth = 6;
             CantidadSds.Name = "CantidadSds";
+            CantidadSds.ReadOnly = true;
             CantidadSds.Width = 125;
             // 
             // ValorUnSds
@@ -143,6 +157,7 @@
             ValorUnSds.HeaderText = "Valor Unitario";
             ValorUnSds.MinimumWidth = 6;
             ValorUnSds.Name = "ValorUnSds";
+            ValorUnSds.ReadOnly = true;
             ValorUnSds.Width = 125;
             // 
             // ValorTotSds
@@ -150,82 +165,137 @@
             ValorTotSds.HeaderText = "Valor Total";
             ValorTotSds.MinimumWidth = 6;
             ValorTotSds.Name = "ValorTotSds";
+            ValorTotSds.ReadOnly = true;
             ValorTotSds.Width = 125;
             // 
-            // textBox1
+            // txtValorU
             // 
-            textBox1.Location = new Point(354, 97);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 2;
+            txtValorU.Location = new Point(407, 141);
+            txtValorU.Margin = new Padding(3, 4, 3, 4);
+            txtValorU.Name = "txtValorU";
+            txtValorU.Size = new Size(114, 27);
+            txtValorU.TabIndex = 2;
+            txtValorU.TextChanged += txtValorU_TextChanged;
+            txtValorU.KeyPress += txtValorU_KeyPress;
             // 
-            // textBox2
+            // txtCantidad
             // 
-            textBox2.Location = new Point(354, 37);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 3;
+            txtCantidad.Location = new Point(407, 61);
+            txtCantidad.Margin = new Padding(3, 4, 3, 4);
+            txtCantidad.Name = "txtCantidad";
+            txtCantidad.Size = new Size(114, 27);
+            txtCantidad.TabIndex = 3;
+            txtCantidad.TextChanged += txtCantidad_TextChanged;
+            txtCantidad.KeyPress += txtCantidad_KeyPress;
             // 
-            // comboBox1
+            // cboConcepto
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(77, 45);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(121, 23);
-            comboBox1.TabIndex = 4;
+            cboConcepto.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboConcepto.FormattingEnabled = true;
+            cboConcepto.Items.AddRange(new object[] { "Venta", "Compra" });
+            cboConcepto.Location = new Point(88, 60);
+            cboConcepto.Margin = new Padding(3, 4, 3, 4);
+            cboConcepto.Name = "cboConcepto";
+            cboConcepto.Size = new Size(138, 28);
+            cboConcepto.TabIndex = 4;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(77, 27);
+            label1.Location = new Point(88, 36);
             label1.Name = "label1";
-            label1.Size = new Size(68, 15);
+            label1.Size = new Size(83, 20);
             label1.TabIndex = 5;
             label1.Text = "CONCEPTO";
             // 
-            // label2
+            // lblCan
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(354, 19);
-            label2.Name = "label2";
-            label2.Size = new Size(65, 15);
-            label2.TabIndex = 6;
-            label2.Text = "CANTIDAD";
+            lblCan.AutoSize = true;
+            lblCan.Location = new Point(407, 37);
+            lblCan.Name = "lblCan";
+            lblCan.Size = new Size(83, 20);
+            lblCan.TabIndex = 6;
+            lblCan.Text = "CANTIDAD";
             // 
-            // label3
+            // lblValor
             // 
-            label3.AutoSize = true;
-            label3.Location = new Point(354, 79);
-            label3.Name = "label3";
-            label3.Size = new Size(98, 15);
-            label3.TabIndex = 7;
-            label3.Text = "VALOR UNITARIO";
+            lblValor.AutoSize = true;
+            lblValor.Location = new Point(407, 117);
+            lblValor.Name = "lblValor";
+            lblValor.Size = new Size(123, 20);
+            lblValor.TabIndex = 7;
+            lblValor.Text = "VALOR UNITARIO";
             // 
             // lblfecha
             // 
             lblfecha.AutoSize = true;
             lblfecha.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblfecha.Location = new Point(77, 97);
+            lblfecha.Location = new Point(88, 117);
             lblfecha.Name = "lblfecha";
-            lblfecha.Size = new Size(51, 20);
+            lblfecha.Size = new Size(65, 25);
             lblfecha.TabIndex = 8;
             lblfecha.Text = "label4";
             // 
+            // btnBorrar
+            // 
+            btnBorrar.BackColor = Color.FromArgb(255, 224, 192);
+            btnBorrar.Location = new Point(1184, 537);
+            btnBorrar.Name = "btnBorrar";
+            btnBorrar.Size = new Size(101, 49);
+            btnBorrar.TabIndex = 11;
+            btnBorrar.Text = "🗑";
+            btnBorrar.UseVisualStyleBackColor = false;
+            btnBorrar.Click += btnBorrar_Click;
+            // 
+            // btnInicio
+            // 
+            btnInicio.BackColor = Color.FromArgb(255, 224, 192);
+            btnInicio.Location = new Point(1307, 537);
+            btnInicio.Name = "btnInicio";
+            btnInicio.Size = new Size(105, 49);
+            btnInicio.TabIndex = 12;
+            btnInicio.Text = "🏠";
+            btnInicio.UseVisualStyleBackColor = false;
+            btnInicio.Click += btnInicio_Click;
+            // 
+            // lblTitulo
+            // 
+            lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 10.2F, FontStyle.Bold | FontStyle.Italic, GraphicsUnit.Point);
+            lblTitulo.Location = new Point(407, 9);
+            lblTitulo.Name = "lblTitulo";
+            lblTitulo.Size = new Size(59, 23);
+            lblTitulo.TabIndex = 13;
+            lblTitulo.Text = "label4";
+            // 
+            // btnAgg
+            // 
+            btnAgg.Location = new Point(606, 140);
+            btnAgg.Name = "btnAgg";
+            btnAgg.Size = new Size(94, 29);
+            btnAgg.TabIndex = 14;
+            btnAgg.Text = "Agregar";
+            btnAgg.UseVisualStyleBackColor = true;
+            btnAgg.Click += btnAgg_Click;
+            // 
             // frmMetodoUeps
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 387);
+            ClientSize = new Size(1424, 598);
+            Controls.Add(btnAgg);
+            Controls.Add(lblTitulo);
+            Controls.Add(btnInicio);
+            Controls.Add(btnBorrar);
             Controls.Add(lblfecha);
-            Controls.Add(label3);
-            Controls.Add(label2);
+            Controls.Add(lblValor);
+            Controls.Add(lblCan);
             Controls.Add(label1);
-            Controls.Add(comboBox1);
-            Controls.Add(textBox2);
-            Controls.Add(textBox1);
+            Controls.Add(cboConcepto);
+            Controls.Add(txtCantidad);
+            Controls.Add(txtValorU);
             Controls.Add(dataGridView1);
-            Controls.Add(button1);
-            Margin = new Padding(3, 2, 3, 2);
+            Controls.Add(btnExportar);
             Name = "frmMetodoUeps";
             Text = "Método UEPS";
             ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
@@ -235,7 +305,7 @@
 
         #endregion
 
-        private Button button1;
+        private Button btnExportar;
         private DataGridView dataGridView1;
         private DataGridViewTextBoxColumn Fecha;
         private DataGridViewTextBoxColumn Concepto;
@@ -248,12 +318,16 @@
         private DataGridViewTextBoxColumn CantidadSds;
         private DataGridViewTextBoxColumn ValorUnSds;
         private DataGridViewTextBoxColumn ValorTotSds;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private ComboBox comboBox1;
+        private TextBox txtValorU;
+        private TextBox txtCantidad;
+        private ComboBox cboConcepto;
         private Label label1;
-        private Label label2;
-        private Label label3;
+        private Label lblCan;
+        private Label lblValor;
         private Label lblfecha;
+        private Button btnBorrar;
+        private Button btnInicio;
+        private Label lblTitulo;
+        private Button btnAgg;
     }
 }
