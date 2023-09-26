@@ -198,6 +198,7 @@
             cboConcepto.Name = "cboConcepto";
             cboConcepto.Size = new Size(138, 28);
             cboConcepto.TabIndex = 4;
+            cboConcepto.SelectedIndexChanged += CboConcepto_SelectedIndexChanged;
             // 
             // label1
             // 
