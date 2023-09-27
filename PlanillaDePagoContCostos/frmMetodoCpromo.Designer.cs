@@ -63,6 +63,7 @@
             btnAgg.TabIndex = 34;
             btnAgg.Text = "Agregar";
             btnAgg.UseVisualStyleBackColor = true;
+            btnAgg.Click += btnAgg_Click;
             // 
             // lblTitulo
             // 
@@ -121,6 +122,7 @@
             cboConcepto.Name = "cboConcepto";
             cboConcepto.Size = new Size(138, 28);
             cboConcepto.TabIndex = 28;
+            cboConcepto.SelectedIndexChanged += CboConcepto_SelectedIndexChanged;
             // 
             // txtCantidad
             // 
@@ -129,6 +131,8 @@
             txtCantidad.Name = "txtCantidad";
             txtCantidad.Size = new Size(114, 27);
             txtCantidad.TabIndex = 27;
+            txtCantidad.TextChanged += txtCantidad_TextChanged;
+            txtCantidad.KeyPress += txtCantidad_KeyPress;
             // 
             // txtValorU
             // 
@@ -137,6 +141,8 @@
             txtValorU.Name = "txtValorU";
             txtValorU.Size = new Size(114, 27);
             txtValorU.TabIndex = 26;
+            txtValorU.TextChanged += txtValorU_TextChanged;
+            txtValorU.KeyPress += txtValorU_KeyPress;
             // 
             // dataGridView1
             // 
@@ -249,6 +255,7 @@
             btnInicio.TabIndex = 37;
             btnInicio.Text = "🏠";
             btnInicio.UseVisualStyleBackColor = false;
+            btnInicio.Click += btnInicio_Click;
             // 
             // btnBorrar
             // 
@@ -259,6 +266,7 @@
             btnBorrar.TabIndex = 36;
             btnBorrar.Text = "🗑";
             btnBorrar.UseVisualStyleBackColor = false;
+            btnBorrar.Click += btnBorrar_Click;
             // 
             // btnExportar
             // 
@@ -269,6 +277,7 @@
             btnExportar.TabIndex = 35;
             btnExportar.Text = "EXPORTAR";
             btnExportar.UseVisualStyleBackColor = false;
+            btnExportar.Click += btnExportar_Click;
             // 
             // frmMetodoCpromo
             // 

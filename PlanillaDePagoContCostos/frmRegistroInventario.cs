@@ -64,7 +64,7 @@ namespace PlanillaDePagoContCostos
                 frmMetodoCpromo prom = new frmMetodoCpromo();
                 prom.ShowDialog();
             }
-            else MessageBox.Show("Seleccione una opcion dentro de la figuras bidimencionales ");
+            else MessageBox.Show("Seleccione una opcion dentro de las opciones.");
         }
 
         private void btnCerrarPrograma_Click(object sender, EventArgs e)
